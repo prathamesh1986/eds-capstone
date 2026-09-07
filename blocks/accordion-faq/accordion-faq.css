@@ -1,0 +1,84 @@
+/*
+ * Accordion Block (accordion-faq variant)
+ * Visual design migrated from https://wknd.site/us/en/faqs.html
+ * Source: Adobe Core Components accordion (.cmp-accordion)
+ */
+
+.accordion-faq .accordion-faq-item {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+
+/* question row (summary) */
+.accordion-faq .accordion-faq-item summary {
+  position: relative;
+  display: block;
+  padding: 13px 40px 13px 0;
+  border-bottom: 2px solid rgb(235 235 235);
+  cursor: pointer;
+  list-style: none;
+  outline: none;
+}
+
+.accordion-faq .accordion-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* question text */
+.accordion-faq .accordion-faq-item summary p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: #000;
+}
+
+/* +/- toggle icon on the right (recreated: wknd-icon-font unavailable) */
+.accordion-faq .accordion-faq-item summary::before,
+.accordion-faq .accordion-faq-item summary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  background-color: #000;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* horizontal bar (always visible) */
+.accordion-faq .accordion-faq-item summary::before {
+  width: 18px;
+  height: 2px;
+  transform: translateY(-50%);
+}
+
+/* vertical bar (visible only when collapsed -> forms a plus) */
+.accordion-faq .accordion-faq-item summary::after {
+  width: 2px;
+  height: 18px;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+/* expanded state: hide vertical bar -> minus */
+.accordion-faq .accordion-faq-item[open] summary::after {
+  transform: translateY(-50%) scaleY(0);
+  opacity: 0;
+}
+
+/* answer panel */
+.accordion-faq .accordion-faq-item .accordion-faq-item-body {
+  padding: 7px 0 0 7px;
+  background-color: transparent;
+}
+
+.accordion-faq .accordion-faq-item .accordion-faq-item-body p {
+  margin: 0 0 13.5px;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-color);
+}

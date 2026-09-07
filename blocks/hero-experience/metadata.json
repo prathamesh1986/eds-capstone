@@ -1,0 +1,39 @@
+{
+  "variantName": "hero-experience",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-09-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/adventures.html",
+    "originPage": "WKND Adventures listing page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "large landscape image + white content box (heading + paragraph), no CTA",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "light-themed intro hero banners with an overlapping content box",
+      "section/landing intros with a large photo, heading and supporting paragraph",
+      "hero banners without a call-to-action button"
+    ],
+    "notSuitableFor": [
+      "dark full-bleed promo banners with a CTA (use hero-promo)",
+      "rotating multi-slide banners (use carousel-hero)",
+      "grids of repeating items (use cards)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/adventures"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-05T00:00:00.000Z"
+  }
+}

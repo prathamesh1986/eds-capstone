@@ -1,0 +1,221 @@
+/* Block: carousel-hero
+ * Visual design extracted from WKND source (cmp-carousel--hero / cmp-teaser--hero).
+ * Full-bleed background image with a white content card below (overlapping on desktop),
+ * yellow uppercase CTA, dark dot indicators, black chevron arrows.
+ */
+
+/* --- Full-bleed: break the carousel out of the constrained section --- */
+
+/* Specificity must beat `main > .section > div { max-width: 1200px }` */
+main .section > .carousel-hero-wrapper {
+  max-width: none;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 0;
+}
+
+/* --- Slider mechanics (functional; required by carousel-hero.js) --- */
+.carousel-hero .carousel-hero-slides-container {
+  position: relative;
+}
+
+.carousel-hero .carousel-hero-slides,
+.carousel-hero .carousel-hero-slide-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-hero .carousel-hero-slides {
+  display: flex;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow: scroll clip;
+}
+
+.carousel-hero .carousel-hero-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-hero .carousel-hero-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+/* --- Background image (full width, cover) --- */
+.carousel-hero .carousel-hero-slide-image {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-hero .carousel-hero-slide-image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-hero .carousel-hero-slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- White content card --- */
+.carousel-hero .carousel-hero-slide-content {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: left;
+  padding: 0 14px 18px;
+}
+
+.carousel-hero .carousel-hero-slide-content h2 {
+  margin: 18px 0 0;
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  font-size: 36px; /* source keeps 36px across breakpoints */
+  line-height: 54px;
+  color: var(--text-color);
+}
+
+.carousel-hero .carousel-hero-slide-content p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 18px */
+  line-height: 31.5px;
+  color: var(--text-color);
+}
+
+/* --- Yellow uppercase CTA --- */
+.carousel-hero .carousel-hero-slide-content p:last-child {
+  margin: 18px 0;
+}
+
+.carousel-hero .carousel-hero-slide-content a:any-link {
+  display: inline-block;
+  padding: 14px 35px;
+  border: 0;
+  border-radius: 0;
+  background-color: rgb(255 234 0);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.carousel-hero .carousel-hero-slide-content a:hover,
+.carousel-hero .carousel-hero-slide-content a:focus-visible {
+  background-color: rgb(230 211 0);
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+/* --- Dot indicators (centered, transparent background) --- */
+.carousel-hero .carousel-hero-slide-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin: 9px 0 0;
+  padding: 12px 0;
+  line-height: 0;
+}
+
+.carousel-hero .carousel-hero-slide-indicator {
+  margin: 0 7px;
+}
+
+.carousel-hero .carousel-hero-slide-indicator button {
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(175 175 175);
+  transition: background-color 0.2s;
+}
+
+.carousel-hero .carousel-hero-slide-indicator button:disabled,
+.carousel-hero .carousel-hero-slide-indicator button:hover,
+.carousel-hero .carousel-hero-slide-indicator button:focus-visible {
+  background-color: rgb(0 0 0 / 80%);
+}
+
+/* --- Navigation arrows (black chevrons, no background, bottom-right) --- */
+.carousel-hero .carousel-hero-navigation-buttons {
+  position: absolute;
+  bottom: 8px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 2;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.carousel-hero .carousel-hero-navigation-buttons button {
+  position: relative;
+  width: 26px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgb(0 0 0);
+  border-bottom: 0;
+  border-left: 0;
+  transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button.slide-next::after {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* --- Desktop: card overlaps image, fixed image height --- */
+@media (width >= 900px) {
+  .carousel-hero .carousel-hero-slide-image {
+    aspect-ratio: auto;
+    height: 640px;
+  }
+
+  .carousel-hero .carousel-hero-slide-content {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1192px; /* 1136px content + 28px padding each side */
+    min-height: 180px;
+    margin: -180px auto 0;
+    padding: 0 28px 18px;
+  }
+
+  .carousel-hero .carousel-hero-navigation-buttons {
+    right: 40px;
+    bottom: 12px;
+  }
+}

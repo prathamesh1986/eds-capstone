@@ -1,0 +1,48 @@
+/* cards-specs -- adventure spec sidebar: text-only label/value list */
+
+/* Values extracted from WKND source computed styles (no images, no borders/dividers) */
+
+.cards-specs > ul {
+  list-style: none;
+  margin: 18px 0;
+  padding: 0;
+  display: block;
+}
+
+.cards-specs > ul > li {
+  margin-bottom: 22.5px;
+  border: none;
+  background-color: transparent;
+}
+
+.cards-specs > ul > li:last-child {
+  margin-bottom: 0;
+}
+
+.cards-specs .cards-specs-card-body {
+  margin: 0;
+}
+
+/* Label (h3) -- small, uppercase, gray; uses body font, not heading font */
+.cards-specs .cards-specs-card-body h3 {
+  margin: 0;
+  padding-top: 12px;
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: rgb(105 105 105);
+}
+
+/* Value (p) -- bold, uppercase, dark */
+.cards-specs .cards-specs-card-body p {
+  margin: 0;
+  padding-top: 7px;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-transform: uppercase;
+  color: var(--text-color);
+}

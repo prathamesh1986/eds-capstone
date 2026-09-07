@@ -1,0 +1,39 @@
+{
+  "variantName": "tabs-filter",
+  "baseBlock": "tabs",
+  "version": "1.0.0",
+  "created": "2026-09-05T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/adventures.html",
+    "originPage": "WKND Adventures listing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "filter",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "category tab labels + per-tab grid of adventure cards (image + linked title + short description)",
+    "buttonCount": 0,
+    "imageCount": 16
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "category-filtered listings of items presented as switchable tab panels",
+      "browsing large sets of image + title + description items grouped by category",
+      "any tabbed interface that filters a grid of content"
+    ],
+    "notSuitableFor": [
+      "single non-filterable content grids (use cards)",
+      "expandable Q&A (use accordion)",
+      "rotating galleries (use carousel-hero)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/adventures"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-05T00:00:00.000Z"
+  }
+}

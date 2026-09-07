@@ -1,0 +1,99 @@
+/* hero-promo -- WKND "imagebottom" teaser: full-bleed image with an
+   overlapping white content card (desktop) / stacked content (mobile).
+   Values extracted from source computed styles (see migration-work). */
+
+/* Full-bleed: neutralize section max-width + gutters for this block */
+.hero-promo-container .hero-promo-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-promo {
+  color: var(--text-color);
+}
+
+/* Rows: image row + content row */
+.hero-promo > div {
+  margin: 0;
+}
+
+/* --- Image row (full-bleed) --- */
+.hero-promo > div:first-child,
+.hero-promo > div:first-child > div {
+  margin: 0;
+  padding: 0;
+}
+
+.hero-promo picture {
+  display: block;
+  line-height: 0;
+}
+
+.hero-promo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2; /* mobile crop (375x250) */
+  object-fit: cover;
+}
+
+/* --- Content cell --- */
+.hero-promo > div:last-child > div {
+  padding: 0 14px; /* mobile side gutter */
+}
+
+.hero-promo h2 {
+  margin: 18px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl); /* 36px mobile / matches source 36px */
+  font-weight: 400;
+  line-height: 1.5; /* 54px at 36px */
+  color: var(--text-color);
+}
+
+.hero-promo p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 18px */
+  line-height: 1.75; /* 31.5px at 18px */
+  color: var(--text-color);
+}
+
+/* CTA: yellow block button (raw <a>, not EDS .button-decorated) */
+.hero-promo p:has(> a) {
+  margin: 18px 0;
+}
+
+.hero-promo a:any-link {
+  display: inline-block;
+  padding: 14px 35px;
+  background-color: #ffea00;
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.hero-promo a:hover {
+  background-color: #ffea00;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+/* --- Desktop: overlapping white card --- */
+@media (width >= 900px) {
+  .hero-promo img {
+    aspect-ratio: 2 / 1; /* desktop crop (1280x640) */
+  }
+
+  .hero-promo > div:last-child > div {
+    position: relative;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: -180px auto 0; /* overlap image bottom */
+    padding: 0 28px;
+    background-color: var(--background-color);
+  }
+}

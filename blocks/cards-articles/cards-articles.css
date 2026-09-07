@@ -1,0 +1,80 @@
+/* Block: cards-articles -- values extracted from source computed styles (wknd.site image-list) */
+
+.cards-articles > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px 14px;
+}
+
+@media (width >= 600px) {
+  .cards-articles > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 900px) {
+  .cards-articles > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* plain card -- source has no border, background, radius, or shadow */
+.cards-articles > ul > li {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: initial;
+  box-shadow: none;
+}
+
+.cards-articles .cards-articles-card-image {
+  line-height: 0;
+}
+
+.cards-articles .cards-articles-card-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 260 / 200;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.cards-articles .cards-articles-card-body {
+  margin: 0;
+}
+
+/* title -- uppercase, dark, semibold (source renders inner title span, not the link color) */
+.cards-articles .cards-articles-card-body h3 {
+  margin: 7px 0 0;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  text-transform: uppercase;
+}
+
+.cards-articles .cards-articles-card-body h3 a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.cards-articles .cards-articles-card-body h3 a:hover {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+/* description -- uppercase, muted grey, truncated to a single line */
+.cards-articles .cards-articles-card-body p {
+  margin: 16px 0 0;
+  font-size: 14px;
+  line-height: 21px;
+  color: #696969;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,11 @@
+{
+  "type": "da",
+  "sites": {
+    "eds-capstone": {
+      "previewOrg": "prathamesh1986",
+      "previewSite": "eds-capstone",
+      "contentHostUrl": "https://content.da.live/prathamesh1986/eds-capstone/",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

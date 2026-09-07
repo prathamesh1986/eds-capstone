@@ -1,0 +1,84 @@
+/* hero-experience -- light intro hero: full-bleed image with overlapping white content box */
+
+/* Values extracted from source computed styles (wknd.site .cmp-teaser--hero). */
+
+/* Full-bleed: escape the section's max-width/padding container */
+.hero-experience-container .hero-experience-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.hero-experience {
+  position: relative;
+}
+
+/* rows carry no default spacing */
+.hero-experience > div,
+.hero-experience > div > div {
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Image (row 1) --- */
+.hero-experience picture {
+  display: block;
+  line-height: 0;
+}
+
+.hero-experience img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* --- Content box (row 2) --- */
+.hero-experience > div:last-child {
+  position: relative;
+  z-index: 1;
+  background-color: var(--background-color);
+  padding: 0 14px;
+}
+
+.hero-experience h2 {
+  margin: 18px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 54px;
+  color: var(--text-color);
+}
+
+.hero-experience p {
+  margin: 0;
+  padding-bottom: 18px;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 31.5px;
+  color: var(--text-color);
+}
+
+/* When authored without an image, show content on a plain light surface */
+.hero-experience.no-image > div:last-child {
+  margin: 0;
+}
+
+@media (width >= 900px) {
+  .hero-experience img {
+    aspect-ratio: 2 / 1;
+  }
+
+  /* white box overlaps the bottom of the image, inset 44px each side */
+  .hero-experience > div:last-child {
+    min-height: 180px;
+    margin: -180px 44px 0;
+    padding: 0 28px;
+  }
+
+  .hero-experience.no-image > div:last-child {
+    min-height: 0;
+    margin: 0;
+  }
+}

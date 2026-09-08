@@ -70,11 +70,20 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  // Resolve relative image paths (from nav.plain.html) against the same base the
-  // fragment was fetched from (/content on localhost, / on DA/EDS production).
-  nav.querySelectorAll('img[src]').forEach((img) => {
-    const src = img.getAttribute('src');
-    if (src && !src.startsWith('http') && !src.startsWith('/')) {
+  // Resolve nav image sources. DA's asset pipeline can rewrite a relative
+  // fragment image (images/x.svg) to a broken "about:error" src at ingest, so
+  // repair by alt text against the known image files, then fall back to
+  // resolving genuine relative paths against the fetch base.
+  const NAV_IMAGES = { 'wknd logo': 'wknd-logo.svg' };
+  nav.querySelectorAll('img').forEach((img) => {
+    const src = img.getAttribute('src') || '';
+    const alt = (img.getAttribute('alt') || '').trim().toLowerCase();
+    const known = NAV_IMAGES[alt];
+    if ((!src || src.startsWith('about:') || src === '') && known) {
+      img.setAttribute('src', `${base}images/${known}`);
+      img.removeAttribute('width');
+      img.removeAttribute('height');
+    } else if (src && !src.startsWith('http') && !src.startsWith('/') && !src.startsWith('about:')) {
       img.setAttribute('src', `${base}${src}`);
     }
   });

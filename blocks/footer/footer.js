@@ -21,11 +21,25 @@ export default async function decorate(block) {
   footer.className = 'footer-inner';
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
-  // Resolve relative image paths (from footer.plain.html) against the same base
-  // the fragment was fetched from (/content on localhost, / on DA/EDS production).
-  footer.querySelectorAll('img[src]').forEach((img) => {
-    const src = img.getAttribute('src');
-    if (src && !src.startsWith('http') && !src.startsWith('/')) {
+  // Resolve footer image sources. DA's asset pipeline can rewrite a relative
+  // fragment image (images/x.svg) to a broken "about:error" src at ingest, so
+  // repair by alt text against the known image files, then fall back to
+  // resolving genuine relative paths against the fetch base.
+  const FOOTER_IMAGES = {
+    'wknd logo': 'wknd-logo.svg',
+    'facebook wknd': 'social-facebook.svg',
+    'twitter wknd': 'social-twitter.svg',
+    'instagram wknd': 'social-instagram.svg',
+  };
+  footer.querySelectorAll('img').forEach((img) => {
+    const src = img.getAttribute('src') || '';
+    const alt = (img.getAttribute('alt') || '').trim().toLowerCase();
+    const known = FOOTER_IMAGES[alt];
+    if ((!src || src.startsWith('about:') || src === '') && known) {
+      img.setAttribute('src', `${base}images/${known}`);
+      img.removeAttribute('width');
+      img.removeAttribute('height');
+    } else if (src && !src.startsWith('http') && !src.startsWith('/') && !src.startsWith('about:')) {
       img.setAttribute('src', `${base}${src}`);
     }
   });

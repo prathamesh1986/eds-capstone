@@ -53,8 +53,12 @@ function decorateSearch(section) {
  */
 export default async function decorate(block) {
   // Metadata-independent dual-fetch: /content first (localhost/aem up), then root (DA/EDS prod)
+  let base = '/content/';
   let resp = await fetch('/content/nav.plain.html');
-  if (!resp.ok) resp = await fetch('/nav.plain.html');
+  if (!resp.ok) {
+    base = '/';
+    resp = await fetch('/nav.plain.html');
+  }
   if (!resp.ok) return;
   const html = await resp.text();
 
@@ -66,12 +70,12 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  // Resolve relative image paths (from nav.plain.html) to the content root so
-  // they don't resolve against the current page URL.
+  // Resolve relative image paths (from nav.plain.html) against the same base the
+  // fragment was fetched from (/content on localhost, / on DA/EDS production).
   nav.querySelectorAll('img[src]').forEach((img) => {
     const src = img.getAttribute('src');
     if (src && !src.startsWith('http') && !src.startsWith('/')) {
-      img.setAttribute('src', `/content/${src}`);
+      img.setAttribute('src', `${base}${src}`);
     }
   });
 

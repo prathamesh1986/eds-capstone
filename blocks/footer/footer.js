@@ -4,8 +4,12 @@
  */
 export default async function decorate(block) {
   // Metadata-independent dual-fetch: /content first (localhost), then root (DA/EDS prod)
+  let base = '/content/';
   let resp = await fetch('/content/footer.plain.html');
-  if (!resp.ok) resp = await fetch('/footer.plain.html');
+  if (!resp.ok) {
+    base = '/';
+    resp = await fetch('/footer.plain.html');
+  }
   if (!resp.ok) return;
   const html = await resp.text();
 
@@ -17,11 +21,12 @@ export default async function decorate(block) {
   footer.className = 'footer-inner';
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
-  // Resolve relative image paths (from footer.plain.html) to the content root
+  // Resolve relative image paths (from footer.plain.html) against the same base
+  // the fragment was fetched from (/content on localhost, / on DA/EDS production).
   footer.querySelectorAll('img[src]').forEach((img) => {
     const src = img.getAttribute('src');
     if (src && !src.startsWith('http') && !src.startsWith('/')) {
-      img.setAttribute('src', `/content/${src}`);
+      img.setAttribute('src', `${base}${src}`);
     }
   });
 

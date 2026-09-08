@@ -157,7 +157,8 @@ main .section > .carousel-hero-wrapper {
   background-color: rgb(0 0 0 / 80%);
 }
 
-/* --- Navigation arrows (black chevrons, no background, bottom-right) --- */
+/* --- Navigation arrows (black chevrons, no background, bottom-right) ---
+   Aligned to the content column, not the full-bleed viewport edge. */
 .carousel-hero .carousel-hero-navigation-buttons {
   position: absolute;
   bottom: 8px;
@@ -214,8 +215,10 @@ main .section > .carousel-hero-wrapper {
     padding: 0 28px 18px;
   }
 
+  /* Keep the arrows aligned to the ~1200px content column rather than the
+     full-bleed viewport edge: offset = (100vw - column) / 2 + gutter. */
   .carousel-hero .carousel-hero-navigation-buttons {
-    right: 40px;
+    right: max(40px, calc((100vw - 1200px) / 2 + 40px));
     bottom: 12px;
   }
 }

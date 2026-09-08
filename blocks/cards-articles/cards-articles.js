@@ -1,24 +1,29 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 
 /**
- * Detect dynamic mode: a `dynamic` variant whose cells hold a query-index
- * path (optionally a second cell with a max card count).
+ * Detect dynamic mode by the presence of a query-index reference anywhere in
+ * the block (link href or plain text). The `dynamic` variant class is a hint
+ * but NOT required — this prevents the config rows from being rendered as
+ * literal cards if the class is dropped during content processing.
  * @param {Element} block
  * @returns {{ source: string, limit: number } | null}
  */
 function getDynamicConfig(block) {
-  if (!block.classList.contains('dynamic')) return null;
   const rows = [...block.querySelectorAll(':scope > div')];
   let source = '';
   let limit = 0;
   rows.forEach((row) => {
-    const text = row.textContent.trim();
     const link = row.querySelector('a');
     const href = link ? link.getAttribute('href') : '';
+    const text = row.textContent.trim();
     if (/query-index\.json/.test(href)) source = href;
     else if (/query-index\.json/.test(text)) source = text;
     else if (/^\d+$/.test(text)) limit = parseInt(text, 10);
   });
+  if (!source && block.classList.contains('dynamic')) {
+    // dynamic variant but no explicit source: fall back to the magazine index
+    source = '/us/en/magazine/query-index.json';
+  }
   return source ? { source, limit: limit || 4 } : null;
 }
 

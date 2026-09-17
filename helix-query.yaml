@@ -22,3 +22,25 @@ indices:
       lastModified:
         select: none
         value: parseTimestamp(headers('last-modified'), 'ddd, DD MMM YYYY hh:mm:ss GMT')
+
+  # Index of WKND adventures, used by the dynamic adventures listing.
+  adventures:
+    include:
+      - '/us/en/adventures/**'
+    exclude:
+      # the adventures landing page itself is not an adventure
+      - '/us/en/adventures'
+    target: /us/en/adventures/query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, 'content')
+      lastModified:
+        select: none
+        value: parseTimestamp(headers('last-modified'), 'ddd, DD MMM YYYY hh:mm:ss GMT')

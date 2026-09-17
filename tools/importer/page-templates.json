@@ -33,7 +33,7 @@
           ]
         },
         {
-          "name": "cards-specs",
+          "name": "cards",
           "instances": [
             ".contentfragment.cmp-contentfragment--elements"
           ]
@@ -56,7 +56,7 @@
       "description": "To be named in naming step",
       "blocks": [
         {
-          "name": "hero-experience",
+          "name": "hero",
           "instances": [
             ".teaser.cmp-teaser--hero.aem-GridColumn"
           ]
@@ -102,7 +102,7 @@
           ]
         },
         {
-          "name": "columns-featured",
+          "name": "columns",
           "instances": [
             ".teaser.cmp-teaser--featured"
           ],
@@ -115,7 +115,7 @@
           ]
         },
         {
-          "name": "hero-promo",
+          "name": "hero",
           "instances": [
             ".teaser.cmp-teaser--hero.cmp-teaser--imagebottom"
           ]

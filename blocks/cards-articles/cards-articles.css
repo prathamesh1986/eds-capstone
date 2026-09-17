@@ -5,8 +5,8 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px 14px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px 0;
 }
 
 @media (width >= 600px) {
@@ -67,14 +67,13 @@
   text-decoration: none;
 }
 
-/* description -- uppercase, muted grey, truncated to a single line */
+/* description -- uppercase, muted grey; wraps like the source (no nowrap,
+   which previously forced the grid track wide and broke mobile layout) */
 .cards-articles .cards-articles-card-body p {
   margin: 16px 0 0;
   font-size: 14px;
   line-height: 21px;
   color: #696969;
   text-transform: uppercase;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
 }

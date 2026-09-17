@@ -52,12 +52,14 @@ function decorateSearch(section) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // Metadata-independent dual-fetch: /content first (localhost/aem up), then root (DA/EDS prod)
-  let base = '/content/';
-  let resp = await fetch('/content/nav.plain.html');
+  // Metadata-independent dual-fetch: root first (DA/EDS prod, and also valid on
+  // localhost/aem up), then /content fallback. Root-first avoids a guaranteed
+  // 404 on production, where the fragment is served at the site root.
+  let base = '/';
+  let resp = await fetch('/nav.plain.html');
   if (!resp.ok) {
-    base = '/';
-    resp = await fetch('/nav.plain.html');
+    base = '/content/';
+    resp = await fetch('/content/nav.plain.html');
   }
   if (!resp.ok) return;
   const html = await resp.text();

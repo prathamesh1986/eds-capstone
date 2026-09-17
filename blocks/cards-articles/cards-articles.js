@@ -3,8 +3,9 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 /**
  * Detect dynamic mode by the presence of a query-index reference anywhere in
  * the block (link href or plain text). The `dynamic` variant class is a hint
- * but NOT required — this prevents the config rows from being rendered as
- * literal cards if the class is dropped during content processing.
+ * but NOT required — this prevents config rows from rendering as literal cards
+ * if the class is dropped during content processing. A second numeric cell
+ * caps the card count; when omitted (limit 0), all indexed rows are shown.
  * @param {Element} block
  * @returns {{ source: string, limit: number } | null}
  */
@@ -24,7 +25,7 @@ function getDynamicConfig(block) {
     // dynamic variant but no explicit source: fall back to the magazine index
     source = '/us/en/magazine/query-index.json';
   }
-  return source ? { source, limit: limit || 4 } : null;
+  return source ? { source, limit: limit || 0 } : null;
 }
 
 /**
@@ -93,10 +94,11 @@ export default async function decorate(block) {
       const resp = await fetch(dynamic.source);
       if (resp.ok) {
         const json = await resp.json();
-        const rows = (json.data || [])
+        let rows = (json.data || [])
           // newest first when a lastModified value is present
-          .sort((a, b) => Number(b.lastModified || 0) - Number(a.lastModified || 0))
-          .slice(0, dynamic.limit);
+          .sort((a, b) => Number(b.lastModified || 0) - Number(a.lastModified || 0));
+        // limit 0 (or unset) means show every indexed row
+        if (dynamic.limit > 0) rows = rows.slice(0, dynamic.limit);
         block.textContent = '';
         block.append(buildCardRows(rows));
       } else {

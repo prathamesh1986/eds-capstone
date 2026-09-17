@@ -25,3 +25,49 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+/* --- Variant: specs (adventure spec sidebar, text-only label/value list) ---
+   Folded from the former cards-specs fork; base cards.js emits
+   .cards-card-body, so the variant targets base classes under .specs. */
+.cards.specs > ul {
+  list-style: none;
+  margin: 18px 0;
+  padding: 0;
+  display: block;
+}
+
+.cards.specs > ul > li {
+  margin-bottom: 22.5px;
+  border: none;
+  background-color: transparent;
+}
+
+.cards.specs > ul > li:last-child {
+  margin-bottom: 0;
+}
+
+.cards.specs .cards-card-body {
+  margin: 0;
+}
+
+.cards.specs .cards-card-body h3 {
+  margin: 0;
+  padding-top: 12px;
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  text-transform: uppercase;
+  color: rgb(105 105 105);
+}
+
+.cards.specs .cards-card-body p {
+  margin: 0;
+  padding-top: 7px;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  text-transform: uppercase;
+  color: var(--text-color);
+}

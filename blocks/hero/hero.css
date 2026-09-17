@@ -35,3 +35,185 @@
     padding: 40px 32px;
   }
 }
+
+/* --- Variant: promo (WKND "imagebottom" teaser) ---
+   Folded from the former hero-promo fork. Full-bleed image with an
+   overlapping white content card on desktop / stacked on mobile. */
+.hero-wrapper:has(.hero.promo),
+.hero-wrapper:has(.hero.experience) {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero.promo {
+  position: static;
+  min-height: 0;
+  padding: 0;
+  color: var(--text-color);
+}
+
+.hero.promo > div {
+  margin: 0;
+}
+
+.hero.promo > div:first-child,
+.hero.promo > div:first-child > div {
+  margin: 0;
+  padding: 0;
+}
+
+.hero.promo picture {
+  position: static;
+  z-index: auto;
+  inset: auto;
+  display: block;
+  line-height: 0;
+}
+
+.hero.promo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.hero.promo > div:last-child > div {
+  padding: 0 14px;
+}
+
+.hero.promo h2 {
+  margin: 18px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.hero.promo p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.75;
+  color: var(--text-color);
+}
+
+.hero.promo p:has(> a) {
+  margin: 18px 0;
+}
+
+.hero.promo a:any-link {
+  display: inline-block;
+  padding: 14px 35px;
+  background-color: #ffea00;
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.hero.promo a:hover {
+  background-color: #ffea00;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+@media (width >= 900px) {
+  .hero.promo img {
+    aspect-ratio: 2 / 1;
+  }
+
+  .hero.promo > div:last-child > div {
+    position: relative;
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: -180px auto 0;
+    padding: 0 28px;
+    background-color: var(--background-color);
+  }
+}
+
+/* --- Variant: experience (light intro hero) ---
+   Folded from the former hero-experience fork. */
+.hero.experience {
+  position: relative;
+  min-height: 0;
+  padding: 0;
+}
+
+/* stylelint-disable no-descending-specificity */
+.hero.experience > div,
+.hero.experience > div > div {
+  margin: 0;
+  padding: 0;
+}
+/* stylelint-enable no-descending-specificity */
+
+.hero.experience picture {
+  position: static;
+  z-index: auto;
+  inset: auto;
+  display: block;
+  line-height: 0;
+}
+
+.hero.experience img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.hero.experience > div:last-child {
+  position: relative;
+  z-index: 1;
+  background-color: var(--background-color);
+  padding: 0 14px;
+}
+
+.hero.experience h2 {
+  margin: 18px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 54px;
+  color: var(--text-color);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.hero.experience p {
+  margin: 0;
+  padding-bottom: 18px;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 31.5px;
+  color: var(--text-color);
+}
+
+.hero.experience.no-image > div:last-child {
+  margin: 0;
+}
+
+@media (width >= 900px) {
+  .hero.experience img {
+    aspect-ratio: 2 / 1;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
+  .hero.experience > div:last-child {
+    min-height: 180px;
+    margin: -180px 44px 0;
+    padding: 0 28px;
+  }
+
+  .hero.experience.no-image > div:last-child {
+    min-height: 0;
+    margin: 0;
+  }
+}
